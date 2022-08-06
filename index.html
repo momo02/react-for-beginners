@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+  <script>
+    const root = document.getElementById("root");
+    // span element 생성. 2번째 argument는 element의 property, 3번째 argument는 content(내용)
+    const span = React.createElement(
+      "span", //html 태그명
+      { id: "sexy-span", style: { color: "red" } },
+      "Hello I'm a span"
+    );
+    // span element를 root 안에 render.
+    ReactDOM.render(span, root);
+  </script>
+</html>
