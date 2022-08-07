@@ -12,13 +12,20 @@
   <script type="text/babel">
     const root = document.getElementById("root");
 
-    const Title = (
+    // function Title() {
+    //   return (
+    //     <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
+    //       "Hello I'm a span"
+    //     </h3>
+    //   );
+    // }
+    const Title = () => (
       <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
         "Hello I'm a span"
       </h3>
     );
 
-    const Button = (
+    const Button = () => (
       <button
         onClick={() => console.log("im clicked")}
         style={{ backgroundColor: "tomato" }}
@@ -27,8 +34,17 @@
       </button>
     );
 
-    const container = React.createElement("div", null, [Title, Button]);
+    /**
+     * 컴포넌트의 첫 글자는 반드시 대문자로.
+     * 소문자(ex. Button -> button) 으로 작성하면 React랑 JSX는 HTML 태그로 인식하기 때문.
+     */
+    const Container = () => (
+      <div>
+        <Title />
+        <Button />
+      </div>
+    );
     // span element를 root 안에 render.
-    ReactDOM.render(container, root);
+    ReactDOM.render(<Container />, root);
   </script>
 </html>
