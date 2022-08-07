@@ -13,18 +13,19 @@
     const root = document.getElementById("root");
 
     function App() {
-      // React.useState 리턴값은 배열. 배열의 0번째 요소는 초기 데이터 값, 1번째 요소는 그 데이터를 바꿀수 있는 함수
-      // ---- 구린 방식
-      //  const data = React.useState(0);
-      //  console.log(data);
-      //  const counter = data[0];
-      //  const modifier = data[1];
-      const [counter, modifier] = React.useState(0);
+      // React.useState 리턴값은 배열. 배열의 0번째 요소는 초기 데이터 값, 1번째 요소는 그 데이터를 바꿀수 있는 함수(modifier)
+      const [counter, setCounter] = React.useState(0);
+      const onClick = () => {
+        //counter = counter + 1;
+        //console.log(counter);
 
+        // modifier 함수는 입력값으로 값을 업데이트하고, 컴포넌트 리렌더링을 일으킨다.
+        setCounter(counter + 1);
+      };
       return (
         <div>
-          <h3>Total clicks : 0</h3>
-          <button>Click me</button>
+          <h3>Total clicks : {counter}</h3>
+          <button onClick={onClick}>Click me</button>
         </div>
       );
     }
