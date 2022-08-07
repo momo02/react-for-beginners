@@ -11,40 +11,27 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     const root = document.getElementById("root");
-
-    // function Title() {
-    //   return (
-    //     <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
-    //       "Hello I'm a span"
-    //     </h3>
-    //   );
-    // }
-    const Title = () => (
-      <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
-        "Hello I'm a span"
-      </h3>
-    );
-
-    const Button = () => (
-      <button
-        onClick={() => console.log("im clicked")}
-        style={{ backgroundColor: "tomato" }}
-      >
-        "Click me"
-      </button>
-    );
+    let counter = 0;
+    function countUp() {
+      counter = counter + 1;
+      // Container 다시 랜더링 해주어야 증가된 counter 값이 보여짐.
+      render();
+    }
 
     /**
-     * 컴포넌트의 첫 글자는 반드시 대문자로.
-     * 소문자(ex. Button -> button) 으로 작성하면 React랑 JSX는 HTML 태그로 인식하기 때문.
+     * React.js 는 우리가 Container 컴포넌트를 새로 렌더링 하더라도
+     * 컴포넌트에 포함된 전체 element 를 전부 재생성하지 않고 바뀐부분 (counter 값)만 새로 생성한다.
      */
+    function render() {
+      ReactDOM.render(<Container />, root);
+    }
+
     const Container = () => (
       <div>
-        <Title />
-        <Button />
+        <h3>Total clicks : {counter}</h3>
+        <button onClick={countUp}>Click me</button>
       </div>
     );
-    // span element를 root 안에 render.
-    ReactDOM.render(<Container />, root);
+    render();
   </script>
 </html>
