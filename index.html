@@ -7,26 +7,27 @@
   <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
   <!-- ReactDom (React element 를 가져다가 HTML로 바꾸는 역할) -->
   <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
-  <script>
+  <!-- Babel : JSX로 적은 코드를 브라우저가 이해할 수 있는 형태로 변환해줌. (브라우저는 JSX를 해석못함)-->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
     const root = document.getElementById("root");
-    // span element 생성. 2번째 argument는 element의 property, 3번째 argument는 content(내용)
-    const h3 = React.createElement(
-      "h3",
-      {
-        id: "title",
-        onMouseEnter: () => console.log("mouse enter"),
-      },
-      "Hello I'm a span"
+
+    const Title = (
+      <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
+        "Hello I'm a span"
+      </h3>
     );
-    const btn = React.createElement(
-      "button",
-      {
-        onClick: () => console.log("im clicked"),
-        style: { backgroundColor: "tomato" },
-      },
-      "Click me"
+
+    const Button = (
+      <button
+        onClick={() => console.log("im clicked")}
+        style={{ backgroundColor: "tomato" }}
+      >
+        "Click me"
+      </button>
     );
-    const container = React.createElement("div", null, [h3, btn]);
+
+    const container = React.createElement("div", null, [Title, Button]);
     // span element를 root 안에 render.
     ReactDOM.render(container, root);
   </script>
