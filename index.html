@@ -13,15 +13,19 @@
     const root = document.getElementById("root");
 
     function App() {
-      // React.useState 리턴값은 배열. 배열의 0번째 요소는 초기 데이터 값, 1번째 요소는 그 데이터를 바꿀수 있는 함수(modifier)
-      const [counter, setCounter] = React.useState(0);
+      // << 정리 >>
+      // React.useState 리턴값은 배열.
+      // 배열의 0번째 요소는 state (컴포넌트에서 동적인 값을 상태(state)라 부르며, 동적인 데이터를 다룰 때 사용)
+      // 배열의 1번째 요소는 해당 state 를 바꿀수 있는 함수 (modifier)
+      const [counter, setCounter] = React.useState(0); // 0으로 state 값 초기화.
       const onClick = () => {
-        //counter = counter + 1;
-        //console.log(counter);
-
-        // modifier 함수는 입력값으로 값을 업데이트하고, 컴포넌트 리렌더링을 일으킨다.
+        // modifier 함수를 가지고 state를 변경할 때 컴포넌트 자체가 재생성된다. (새로운 값을 가지고 리렌더링)
+        // 하지만 React.js는 똑똑해서 이 컴포넌트가 리렌더링 될 때 두번째 이벤트리스너가 등록되거나 변경하지않은 Total clicks 등을 다시 만드는게 아니라
+        // 오로지 값이 변경된 부분(counter 값)만 변경한다.
         setCounter(counter + 1);
       };
+      console.log("rendered");
+      console.log(counter);
       return (
         <div>
           <h3>Total clicks : {counter}</h3>
