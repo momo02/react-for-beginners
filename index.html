@@ -8,12 +8,24 @@
   <script>
     const root = document.getElementById("root");
     // span element 생성. 2번째 argument는 element의 property, 3번째 argument는 content(내용)
-    const span = React.createElement(
-      "span", //html 태그명
-      { id: "sexy-span", style: { color: "red" } },
+    const h3 = React.createElement(
+      "h3",
+      {
+        id: "title",
+        onMouseEnter: () => console.log("mouse enter"),
+      },
       "Hello I'm a span"
     );
+    const btn = React.createElement(
+      "button",
+      {
+        onClick: () => console.log("im clicked"),
+        style: { backgroundColor: "tomato" },
+      },
+      "Click me"
+    );
+    const container = React.createElement("div", null, [h3, btn]);
     // span element를 root 안에 render.
-    ReactDOM.render(span, root);
+    ReactDOM.render(container, root);
   </script>
 </html>
