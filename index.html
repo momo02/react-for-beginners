@@ -11,27 +11,23 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     const root = document.getElementById("root");
-    let counter = 0;
-    function countUp() {
-      counter = counter + 1;
-      // Container 다시 랜더링 해주어야 증가된 counter 값이 보여짐.
-      render();
-    }
 
-    /**
-     * React.js 는 우리가 Container 컴포넌트를 새로 렌더링 하더라도
-     * 컴포넌트에 포함된 전체 element 를 전부 재생성하지 않고 바뀐부분 (counter 값)만 새로 생성한다.
-     */
-    function render() {
-      ReactDOM.render(<Container />, root);
-    }
+    function App() {
+      // React.useState 리턴값은 배열. 배열의 0번째 요소는 초기 데이터 값, 1번째 요소는 그 데이터를 바꿀수 있는 함수
+      // ---- 구린 방식
+      //  const data = React.useState(0);
+      //  console.log(data);
+      //  const counter = data[0];
+      //  const modifier = data[1];
+      const [counter, modifier] = React.useState(0);
 
-    const Container = () => (
-      <div>
-        <h3>Total clicks : {counter}</h3>
-        <button onClick={countUp}>Click me</button>
-      </div>
-    );
-    render();
+      return (
+        <div>
+          <h3>Total clicks : 0</h3>
+          <button>Click me</button>
+        </div>
+      );
+    }
+    ReactDOM.render(<App />, root);
   </script>
 </html>
