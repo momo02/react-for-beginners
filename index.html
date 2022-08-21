@@ -18,21 +18,22 @@
     // <Btn text="Save Changes" use={false} size={7} /> ==> Btn({text: 'Save Changes', use: false, size: 7})
     //  props는 컴포넌트가 전달받는 유일한 인자로, 태그에 attribute 형태로 넣은 모든 것을 갖는 object 형태.
     //function Btn(props) {
-    function Btn({ text, big }) {
+    function Btn({ text, onClick }) {
       // { text } -> props object로 부터 text 만 추출. (property를 오브젝트로부터 꺼내는 shortcut 구문)
 
       //console.log(props);
       //console.log(props.text);
-      console.log(text, big);
+      console.log(text + "was rendered");
       return (
         <button
+          onClick={onClick}
           style={{
             backgroundColor: "tomato",
             color: "white",
             padding: "10px 20px",
             border: 0,
             borderRadius: 10,
-            fontSize: big ? 18 : 16,
+            fontSize: 16,
           }}
         >
           {text}
@@ -40,11 +41,20 @@
       );
     }
 
+    // 컴포넌트의 상태(state)가 변경되면 하위 컴포넌트들도 전부 다시 re-rendering 되지만
+    // 그럴 필요가 없는 컴포넌트라면(props의 변경이 일어나지 않음), React Memo (memorize : 기억) 를 사용해서 컴포넌트를 리랜더링 되지않게(기억하게) 할 수 있다.
+    // -> 첫 번째 버튼의 props는 state의 영향을 받아 변경되기 때문에 리랜더링 되어야하지만,
+    //    두 번째 버튼의 props는 변경되지 않으므로 리랜더링 될 필요가 없다.)
+    const MemorizedBtn = React.memo(Btn);
+
     function App() {
+      const [value, setValue] = React.useState("Save Changes");
+      const changeValue = () => setValue("Revert Changes");
+
       return (
         <div>
-          <Btn text="Save Changes" big={true} />
-          <Btn text="Continue" big={false} />
+          <MemorizedBtn text={value} onClick={changeValue} />
+          <MemorizedBtn text="Continue" />
         </div>
       );
     }
