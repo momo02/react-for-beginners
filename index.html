@@ -15,123 +15,36 @@
   <script type="text/babel">
     const root = document.getElementById("root");
 
-    function MinutesToHours() {
-      const [amount, setAmount] = React.useState(0);
-      const [inverted, setInverted] = React.useState(false);
+    // <Btn text="Save Changes" use={false} size={7} /> ==> Btn({text: 'Save Changes', use: false, size: 7})
+    //  props는 컴포넌트가 전달받는 유일한 인자로, 태그에 attribute 형태로 넣은 모든 것을 갖는 object 형태.
+    //function Btn(props) {
+    function Btn({ text, big }) {
+      // { text } -> props object로 부터 text 만 추출. (property를 오브젝트로부터 꺼내는 shortcut 구문)
 
-      const onChange = (event) => {
-        //console.log(event.target.value);
-        setAmount(event.target.value);
-      };
-
-      const reset = () => {
-        setAmount(0);
-      };
-      const onInvert = () => {
-        reset();
-        setInverted((current) => !current);
-      };
-
+      //console.log(props);
+      //console.log(props.text);
+      console.log(text, big);
       return (
-        // cf. JSX 에서는 'class', 'for' 과 같은 이미 선점된 자바스크림트 단어를 사용할 수 없다.
-        // class 는 classFor, for 는 htmlFor 라고 써줘야함.
-        <div>
-          <div>
-            <label htmlFor="minutes">Minutes</label>
-            <input
-              value={inverted ? Math.round(amount * 60) : amount}
-              id="minutes"
-              placeholder="Minutes"
-              type="number"
-              onChange={onChange}
-              disabled={inverted}
-            />
-          </div>
-          <div>
-            <label htmlFor="hours">Hours</label>
-            <input
-              value={inverted ? amount : Math.round(amount / 60)}
-              id="hours"
-              placeholder="Hours"
-              type="number"
-              onChange={onChange}
-              disabled={!inverted}
-            />
-          </div>
-          <button onClick={reset}>Reset</button>
-          <button onClick={onInvert}>
-            {inverted ? "Turn back" : "Invert"}
-          </button>
-        </div>
-      );
-    }
-
-    function KmToMiles() {
-      const [amount, setAmount] = React.useState(0);
-      const [inverted, setInverted] = React.useState(false);
-
-      const onChange = (event) => {
-        //console.log(event.target.value);
-        setAmount(event.target.value);
-      };
-
-      const reset = () => {
-        setAmount(0);
-      };
-      const onInvert = () => {
-        reset();
-        setInverted((current) => !current);
-      };
-
-      return (
-        // cf. JSX 에서는 'class', 'for' 과 같은 이미 선점된 자바스크림트 단어를 사용할 수 없다.
-        // class 는 classFor, for 는 htmlFor 라고 써줘야함.
-        <div>
-          <div>
-            <label htmlFor="km">Km</label>
-            <input
-              value={inverted ? amount * 1.609344 : amount}
-              id="km"
-              placeholder="km"
-              type="number"
-              onChange={onChange}
-              disabled={inverted}
-            />
-          </div>
-          <div>
-            <label htmlFor="mile">Mile</label>
-            <input
-              value={inverted ? amount : amount / 1.609344}
-              id="mile"
-              placeholder="mile"
-              type="number"
-              onChange={onChange}
-              disabled={!inverted}
-            />
-          </div>
-          <button onClick={reset}>Reset</button>
-          <button onClick={onInvert}>
-            {inverted ? "Turn back" : "Invert"}
-          </button>
-        </div>
+        <button
+          style={{
+            backgroundColor: "tomato",
+            color: "white",
+            padding: "10px 20px",
+            border: 0,
+            borderRadius: 10,
+            fontSize: big ? 18 : 16,
+          }}
+        >
+          {text}
+        </button>
       );
     }
 
     function App() {
-      const [index, setIndex] = React.useState("0");
-      const onSelect = (event) => {
-        setIndex(event.target.value);
-      };
       return (
         <div>
-          <h1 className="hi">Super Converter</h1>
-          <select value={index} onChange={onSelect}>
-            <option value="0">Minutes & Hours</option>
-            <option value="1">Km & Miles</option>
-          </select>
-          <hr />
-          {index === "0" ? <MinutesToHours /> : null}
-          {index === "1" ? <KmToMiles /> : null}
+          <Btn text="Save Changes" big={true} />
+          <Btn text="Continue" big={false} />
         </div>
       );
     }
